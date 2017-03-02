@@ -1,4 +1,4 @@
-package service;
+package friendsofmine.service;
 
 import friendsofmine.domain.Activite;
 import friendsofmine.domain.Utilisateur;
@@ -30,6 +30,12 @@ public class InitialisationService {
         utilisateurs.add(new Utilisateur("Smith", "Summer", "summersmith@gmail.com", "F", date));
         utilisateurs.add(new Utilisateur("WAYNE", "Bruce", "imbatman@darkknight.com", "M"));
 
+        activites.add(new Activite("Kick some ass", "Chill out until you find thugs and beat the shit out of them without mercy"));
+        activites.add(new Activite("Time/Space travel", "Go on a journey into parallel dimensions"));
+        activites.add(new Activite("Be an honorable man", "Protect your nephew from your best friend by pretending he's your bastard son with a lack of knowledge"));
+        activites.add(new Activite("Break the 4th wall", "Be a crazy lunatic who shoot first and then talk to an invisible audience of idiots"));
+        activites.add(new Activite("Dress well", "Always wear fine clothes because you're a beautiful motherf*cker"));
+        activites.add(new Activite("Skip Snape's class", "Miss Snape potions class on purpose because he's mean as f*ck, son of bitch of Slytherin"));
         activites.add(new Activite("Regarder la TV", ""));
     }
 

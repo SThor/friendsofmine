@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by 21301646 on 01/03/2017.
+ * Created by 21301646 on 02/03/2017.
  */
 @Controller
-public class UtilisateurController {
+public class ActiviteController {
     @Autowired
     Bootstrap bootstrap;
 
-    @RequestMapping(value = "/utilisateurs", method = RequestMethod.GET)
+    @RequestMapping(value = "/activites", method = RequestMethod.GET)
     String list(Model model) {
-        model.addAttribute("utilisateurs", bootstrap.getUtilisateurs());
-        return "utilisateurs";
+        model.addAttribute("activites", bootstrap.getActivites());
+        return "activites";
     }
 }
