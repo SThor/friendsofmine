@@ -2,10 +2,7 @@ package friendsofmine.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -13,6 +10,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class Activite {
+    @NotNull
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_responsable")
+    private Utilisateur responsable = new Utilisateur();
     @NotNull
     @NotEmpty
     private String titre;
@@ -22,9 +23,10 @@ public class Activite {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public Activite(String titre, String descriptif) {
+    public Activite(String titre, String descriptif, Utilisateur responsable) {
         this.titre = titre;
         this.descriptif = descriptif;
+        responsable.addActivite(this);
     }
 
     public Activite() {
@@ -51,4 +53,7 @@ public class Activite {
         this.descriptif = descriptif;
     }
 
+    public void setResponsable(Utilisateur responsable) {
+        this.responsable = responsable;
+    }
 }

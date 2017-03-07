@@ -2,13 +2,12 @@ package friendsofmine.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 21301646 on 01/03/2017.
@@ -32,6 +31,9 @@ public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @OneToMany(mappedBy = "responsable")
+    private List<Activite> activites = new ArrayList<>();
 
     public Utilisateur() {
 
@@ -98,5 +100,14 @@ public class Utilisateur {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Activite> getActivites() {
+        return new ArrayList<>(activites);
+    }
+
+    public void addActivite(Activite activite) {
+        activites.add(activite);
+        activite.setResponsable(this);
     }
 }

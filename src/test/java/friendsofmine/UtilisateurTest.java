@@ -11,6 +11,7 @@ import javax.validation.ValidatorFactory;
 import java.util.Calendar;
 import java.util.Date;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class UtilisateurTest {
@@ -98,6 +99,12 @@ public class UtilisateurTest {
     public void testUtilisateurSexeNull() {
         Utilisateur util = new Utilisateur("Durand", "Eric", "jd@jd.com", null);
         assertTrue(validator.validate(util).size() > 0);
+    }
+
+    @Test
+    public void testUnNouvelUtilisateurEstSansActivite() {
+        Utilisateur util = new Utilisateur("Durand", "Eric", "jd@jd.com", "M");
+        assertEquals(0, util.getActivites().size());
     }
 
 }
