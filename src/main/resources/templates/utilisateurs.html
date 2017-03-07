@@ -26,20 +26,20 @@
     </style>
 </head>
 <body>
-<h1>Utilisateurs</h1>
+<h1>Liste des utilisateurs</h1>
 <table>
     <tr>
         <th>Nom</th>
         <th>Prénom</th>
         <th>Sexe</th>
-        <th>E-mail</th>
+        <th>E-email</th>
         <th>Date</th>
     </tr>
     <tr th:each="utilisateur : ${utilisateurs}">
         <td th:text="${utilisateur.nom}">Fu</td>
         <td th:text="${utilisateur.prenom}">Bar</td>
         <td th:text="${utilisateur.sexe}">F</td>
-        <td th:text="${utilisateur.mail}">fu@bar.com</td>
+        <td th:text="${utilisateur.email}">fu@bar.com</td>
         <td th:text="${utilisateur.date}">01/01/1993</td>
     </tr>
 </table>

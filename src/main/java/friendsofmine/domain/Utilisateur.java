@@ -2,6 +2,10 @@ package friendsofmine.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
@@ -9,6 +13,7 @@ import java.util.Date;
 /**
  * Created by 21301646 on 01/03/2017.
  */
+@Entity
 public class Utilisateur {
     @NotNull
     @NotEmpty
@@ -18,24 +23,32 @@ public class Utilisateur {
     private String prenom;
     @NotNull
     @Pattern(regexp = "(.*)@(.*)")
-    private String mail;
+    private String email;
     @NotNull
     @Pattern(regexp = "M|F")
     private String sexe;
     private Date date;
 
-    public Utilisateur(String nom, String prenom, String mail, String sexe, Date date) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    public Utilisateur() {
+
+    }
+
+    public Utilisateur(String nom, String prenom, String email, String sexe, Date date) {
         this.nom = nom;
         this.prenom = prenom;
-        this.mail = mail;
+        this.email = email;
         this.sexe = sexe;
         this.date = date;
     }
 
-    public Utilisateur(String nom, String prenom, String mail, String sexe) {
+    public Utilisateur(String nom, String prenom, String email, String sexe) {
         this.nom = nom;
         this.prenom = prenom;
-        this.mail = mail;
+        this.email = email;
         this.sexe = sexe;
     }
 
@@ -55,12 +68,12 @@ public class Utilisateur {
         this.prenom = prenom;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSexe() {
@@ -77,5 +90,13 @@ public class Utilisateur {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,6 @@
 package friendsofmine;
 
-import friendsofmine.controllers.IndexController;
+import friendsofmine.controllers.UtilisateurController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,11 +24,11 @@ public class UtilisateurControllerTest {
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new IndexController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(new UtilisateurController()).build();
     }
 
     @Test
-    public void testIndex() throws Exception {
+    public void testUtilisateurs() throws Exception {
         this.mockMvc.perform(get("/utilisateurs"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("utilisateurs"))
