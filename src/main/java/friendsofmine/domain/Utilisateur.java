@@ -103,11 +103,15 @@ public class Utilisateur {
     }
 
     public List<Activite> getActivites() {
-        return new ArrayList<>(activites);
+        return activites;
+    }
+
+    public void setActivites(List<Activite> activites) {
+        this.activites = activites;
     }
 
     public void addActivite(Activite activite) {
-        activites.add(activite);
-        activite.setResponsable(this);
+        if (!activites.contains(activite))
+            activites.add(activite);
     }
 }

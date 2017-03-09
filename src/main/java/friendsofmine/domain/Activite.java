@@ -11,9 +11,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Activite {
     @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_responsable")
-    private Utilisateur responsable = new Utilisateur();
+    @ManyToOne
+    private Utilisateur responsable;
     @NotNull
     @NotEmpty
     private String titre;
@@ -26,7 +25,7 @@ public class Activite {
     public Activite(String titre, String descriptif, Utilisateur responsable) {
         this.titre = titre;
         this.descriptif = descriptif;
-        responsable.addActivite(this);
+        this.responsable = responsable;
     }
 
     public Activite() {
@@ -51,6 +50,10 @@ public class Activite {
 
     public void setDescriptif(String descriptif) {
         this.descriptif = descriptif;
+    }
+
+    public Utilisateur getResponsable() {
+        return responsable;
     }
 
     public void setResponsable(Utilisateur responsable) {

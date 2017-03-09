@@ -29,4 +29,8 @@ public class Bootstrap {
     public List<Activite> getActivites() {
         return initialisationService.getActivites();
     }
+
+    public InitialisationService getInitialisationService() {
+        return initialisationService;
+    }
 }

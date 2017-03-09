@@ -1,6 +1,7 @@
 package friendsofmine.controllers;
 
 import friendsofmine.Bootstrap;
+import friendsofmine.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UtilisateurController {
     @Autowired
     Bootstrap bootstrap;
+    @Autowired
+    UtilisateurService utilisateurService;
 
     @RequestMapping(value = "/utilisateurs", method = RequestMethod.GET)
     String list(Model model) {
-        model.addAttribute("utilisateurs", bootstrap.getUtilisateurs());
+        model.addAttribute("utilisateurs", utilisateurService.findAllUtilisateurs());
         return "utilisateurs";
     }
 }

@@ -5,6 +5,8 @@ import friendsofmine.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 /**
  * Created by 21301646 on 07/03/2017.
  */
@@ -31,5 +33,9 @@ public class UtilisateurService {
 
     public UtilisateurRepository getUtilisateurRepository() {
         return utilisateurRepository;
+    }
+
+    public ArrayList<Utilisateur> findAllUtilisateurs() {
+        return (ArrayList<Utilisateur>) utilisateurRepository.findAllByOrderByNomAsc();
     }
 }
