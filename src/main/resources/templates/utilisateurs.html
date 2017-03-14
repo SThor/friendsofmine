@@ -1,47 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Utilisateurs</title>
-    <style type="text/css">
-        body {
-            margin: 40px auto;
-            max-width: 650px;
-            line-height: 1.6;
-            font-size: 18px;
-            color: #444;
-            padding: 0 10px
-        }
-
-        h1, h2, h3 {
-            line-height: 1.2
-        }
-
-        table, td, tr, th {
-            border: 1px solid #444;
-            border-collapse: collapse;
-            margin: 5px;
-            padding: 5px;
-        }
-    </style>
+    <title>Friends of Mine</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
+
 <body>
-<h1>Liste des utilisateurs</h1>
-<table>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+<h2>Liste des Utilisateurs</h2>
+<table class="w3-table-all w3-hoverable">
     <tr>
+        <th>Id</th>
         <th>Nom</th>
         <th>Prénom</th>
+        <th>Email</th>
+        <th>Date de naissance</th>
         <th>Sexe</th>
-        <th>E-email</th>
-        <th>Date</th>
     </tr>
     <tr th:each="utilisateur : ${utilisateurs}">
-        <td th:text="${utilisateur.nom}">Fu</td>
-        <td th:text="${utilisateur.prenom}">Bar</td>
-        <td th:text="${utilisateur.sexe}">F</td>
-        <td th:text="${utilisateur.email}">fu@bar.com</td>
-        <td th:text="${utilisateur.date}">01/01/1993</td>
+        <td th:text="${utilisateur.id}"></td>
+        <td th:text="${utilisateur.nom}"></td>
+        <td th:text="${utilisateur.prenom}"></td>
+        <td th:text="${utilisateur.email}"></td>
+        <td th:text="${utilisateur.dateNaissance}"></td>
+        <td th:text="${utilisateur.sexe}"></td>
+        <td><a th:href="${ '/utilisateur/' + utilisateur.id}">Voir</a></td>
+        <td><a th:href="${'/utilisateur/edit/' + utilisateur.id}">Editer</a></td>
+        <td><a th:href="${'/utilisateur/delete/' + utilisateur.id}">Supprimer</a></td>
     </tr>
 </table>
+
 </body>
 </html>

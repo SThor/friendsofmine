@@ -15,8 +15,8 @@ public class UtilisateurService {
     @Autowired
     UtilisateurRepository utilisateurRepository;
 
-    public void saveUtilisateur(Utilisateur utilisateur) {
-        utilisateurRepository.save(utilisateur);
+    public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
+        return utilisateurRepository.save(utilisateur);
     }
 
     public Utilisateur findOneUtilisateur(long id) {
@@ -37,5 +37,9 @@ public class UtilisateurService {
 
     public ArrayList<Utilisateur> findAllUtilisateurs() {
         return (ArrayList<Utilisateur>) utilisateurRepository.findAllByOrderByNomAsc();
+    }
+
+    public void deleteUtilisateur(Utilisateur utilisateur) {
+        utilisateurRepository.delete(utilisateur);
     }
 }

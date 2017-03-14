@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <title>Friends of Mine</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <style type="text/css">body {
-        margin: 40px auto;
-        max-width: 650px;
-        line-height: 1.6;
-        font-size: 18px;
-        color: #444;
-        padding: 0 10px
-    }
-
-    h1, h2, h3 {
-        line-height: 1.2
-    }</style>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 
 <body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-<h1>Welcome</h1>
+<h1>Bienvenue !</h1>
 
-<h2><i>Friends of Mine</i> - index</h2>
+<p>Que voulez-vous faire ?</p>
+<ol>
+    <li><a href="activites.html" th:href="@{/activites}">Consulter la liste des activités</a></li>
+    <li><a href="utilisateurs.html" th:href="@{/utilisateurs}">Consulter la liste des utilisateurs</a></li>
+    <li><a href="utilisateursForm.html" th:href="@{/utilisateur/new}">Créer un nouvel utilisateur</a></li>
+</ol>
 
 </body>
 
