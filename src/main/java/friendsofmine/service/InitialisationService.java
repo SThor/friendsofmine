@@ -1,6 +1,7 @@
 package friendsofmine.service;
 
 import friendsofmine.domain.Activite;
+import friendsofmine.domain.Inscription;
 import friendsofmine.domain.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,16 @@ public class InitialisationService {
     ActiviteService activiteService;
     @Autowired
     UtilisateurService utilisateurService;
+    @Autowired
+    InscriptionService inscriptionService;
     private Utilisateur thom;
     private Utilisateur mary;
     private Activite randonnee;
     private Activite lindyhop;
     private Activite taekwondo;
+    private Inscription maryOnTaekwondo;
+    private Inscription thomOnRandonnee;
+    private Inscription thomOnLindyhop;
 
     public void initDonnees() {
         Calendar cal = Calendar.getInstance();
@@ -55,6 +61,24 @@ public class InitialisationService {
         initRandonnee();
         initLindyhop();
         initTaekwondo();
+        initMaryOnTaekwondo();
+        initThomOnRandonnee();
+        initThomOnLindyhop();
+    }
+
+    private void initThomOnLindyhop() {
+        thomOnLindyhop = new Inscription(thom, lindyhop, null);
+        inscriptionService.saveInscription(thomOnLindyhop);
+    }
+
+    private void initThomOnRandonnee() {
+        thomOnRandonnee = new Inscription(thom, randonnee, null);
+        inscriptionService.saveInscription(thomOnRandonnee);
+    }
+
+    private void initMaryOnTaekwondo() {
+        maryOnTaekwondo = new Inscription(mary, taekwondo, null);
+        inscriptionService.saveInscription(maryOnTaekwondo);
     }
 
     private void initTaekwondo() {
@@ -108,5 +132,17 @@ public class InitialisationService {
 
     public Activite getTaekwondo() {
         return taekwondo;
+    }
+
+    public Inscription getMaryOnTaekwondo() {
+        return maryOnTaekwondo;
+    }
+
+    public Inscription getThomOnRandonnee() {
+        return thomOnRandonnee;
+    }
+
+    public Inscription getThomOnLindyhop() {
+        return thomOnLindyhop;
     }
 }

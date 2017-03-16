@@ -65,8 +65,8 @@ public class UtilisateurController {
 		return "utilisateurForm";
 	}
 
-	@RequestMapping(value = "utilisateur/delete/{id}", method = RequestMethod.DELETE)
-	String delete(@PathVariable Long id, Model model) {
+    @RequestMapping(value = "utilisateur/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    String delete(@PathVariable Long id, Model model) {
 		Utilisateur utilisateur = utilisateurService.findOneUtilisateur(id);
 		if (utilisateur == null) {
 			model.addAttribute("message", "Utilisateur non trouvé.");
