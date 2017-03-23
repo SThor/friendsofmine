@@ -16,11 +16,11 @@ public class InscriptionService {
     InscriptionRepository inscriptionRepository;
 
 
-    public void saveInscription(Inscription ins) {
+    public Inscription saveInscription(Inscription ins) {
         if (ins.getDateInscription() == null) {
             ins.setDateInscription(new Date());
         }
-        inscriptionRepository.save(ins);
+        return inscriptionRepository.save(ins);
     }
 
     public Inscription findOneInscription(Long id) {
