@@ -8,6 +8,8 @@ import friendsofmine.service.ActiviteService;
 import friendsofmine.service.InscriptionService;
 import friendsofmine.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +50,18 @@ public class InscriptionController {
         Utilisateur utilisateur = utilisateurService.findOneUtilisateur(utilisateur_id);
         Activite activite = activiteService.findOneActivite(activite_id);
         Inscription inscription = inscriptionService.saveInscription(new Inscription(utilisateur, activite, null));
-        return new ResponseEntity<Inscription>(inscription, HttpStatus.CREATED);
+        return new ResponseEntity<>(inscription, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/search")
+    public Page<Inscription> search(@RequestParam(required = false) String nom_utilisateur, @RequestParam(required = false) String titre_activite, Pageable pageable) {
+        if (nom_utilisateur != null && titre_activite != null) {
+            return inscriptionService.findByUtilisateurActivite(nom_utilisateur, titre_activite, pageable);
+        } else if (nom_utilisateur != null) {
+            return inscriptionService.findByUtilisateur(nom_utilisateur, pageable);
+        } else if (titre_activite != null) {
+            return inscriptionService.findByActivite(titre_activite, pageable);
+        }
+        return inscriptionService.findAll(pageable);
     }
 }

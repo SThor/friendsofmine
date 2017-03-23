@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.Charset;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -86,6 +87,42 @@ public class InscriptionControllerTest {
                 .andExpect(status().isOk());
 
         assertEquals(count - 1, inscriptionService.countInscription());
+    }
+
+    @Test
+    public void testSearchUtilisateur() throws Exception {
+        Utilisateur thom = bootstrap.getInitialisationService().getThom();
+        mockMvc.perform(get("/api/inscription/search?nom_utilisateur="
+                + thom.getNom()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content", hasSize(2)));
+    }
+
+    @Test
+    public void testSearchActivite() throws Exception {
+        Activite lindyhop = bootstrap.getInitialisationService().getLindyhop();
+        mockMvc.perform(get("/api/inscription/search?titre_activite="
+                + lindyhop.getTitre()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content", hasSize(1)));
+    }
+
+    @Test
+    public void testSearchUtilisateurActivite() throws Exception {
+        Inscription thomOnLindyhop = bootstrap.getInitialisationService().getThomOnLindyhop();
+        mockMvc.perform(get("/api/inscription/search?nom_utilisateur="
+                + thomOnLindyhop.getParticipant().getNom()
+                + "&titre_activite="
+                + thomOnLindyhop.getActivite().getTitre()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content", hasSize(1)));
+    }
+
+    @Test
+    public void testSearchVide() throws Exception {
+        mockMvc.perform(get("/api/inscription/search"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content", hasSize(3)));
     }
 
 }

@@ -3,6 +3,8 @@ package friendsofmine.service;
 import friendsofmine.domain.Inscription;
 import friendsofmine.repositories.InscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -37,5 +39,21 @@ public class InscriptionService {
 
     public void deleteInscription(Long id) {
         inscriptionRepository.delete(id);
+    }
+
+    public Page<Inscription> findAll(Pageable pageable) {
+        return inscriptionRepository.findAll(pageable);
+    }
+
+    public Page<Inscription> findByUtilisateurActivite(String nom, String titre, Pageable pageable) {
+        return inscriptionRepository.findByParticipantNomAndActiviteTitreAllIgnoreCase(nom, titre, pageable);
+    }
+
+    public Page<Inscription> findByUtilisateur(String nom, Pageable pageable) {
+        return inscriptionRepository.findByParticipantNomAllIgnoreCase(nom, pageable);
+    }
+
+    public Page<Inscription> findByActivite(String titre, Pageable pageable) {
+        return inscriptionRepository.findByActiviteTitreAllIgnoreCase(titre, pageable);
     }
 }
